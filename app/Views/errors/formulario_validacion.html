@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Formulario</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulario de Registro</h2>
+    <form id="formulario" onsubmit="return validarFormulario()">
+        <label for="ruc">Ruc:</label>
+        <input type="text" id="ruc" name="ruc" required>
+        <span id="errorRuc" class="error"></span><br><br>
+
+        <label for="dni">Dni:</label>
+        <input type="text" id="dni" name="dni" required>
+        <span id="errorDni" class="error"></span><br><br>
+        
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="errorPassword" class="error"></span><br><br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        function validarFormulario() {
+            let esValido = true;
+
+            // Validación del dni
+            const dni = document.getElementById('dni').value;
+            const regexDni = /^ $/;
+            const errorDni = document.getElementById('errorDni');
+            
+            if (!regexDni.test(dni)) {
+                errorDni.textContent = "Ingrese un DNI Valido";
+                esValido = false;
+            } else {
+                errorDni.textContent = "";
+            }
+            // Validación del Ruc
+            const ruc = document.getElementById('ruc').value;
+            const regexRuc = /^$/;
+            const errorRuc = document.getElementById('errorRuc');
+            
+            if (!regexRuc.test(ruc)) {
+                errorRuc.textContent = "Ingrese un RUC Valido";
+                esValido = false;
+            } else {
+                errorRuc.textContent = "";
+            }
+
+            // Validación de la contraseña
+            const password = document.getElementById('password').value;
+            const regexPassword = /^$/;
+            const errorPassword = document.getElementById('errorPassword');
+            
+            if (!regexPassword.test(password)) {
+                errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres, incluyendo una letra y un número.";
+                esValido = false;
+            } else {
+                errorPassword.textContent = "";
+            }
+
+            return esValido; // Impide el envío si hay errores
+        }
+    </script>
+</body>
+</html>
